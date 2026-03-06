@@ -31,6 +31,7 @@
             border-radius: 24px;
             box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
             padding: 20px 25px;
+            position: relative; /* للإبقاء على المحتوى فوق العلامة المائية */
         }
 
         /* رأس الصفحة بتصميم عصري - مع حقول قابلة للتعديل */
@@ -45,6 +46,8 @@
             padding: 20px 25px;
             border-radius: 20px;
             color: white;
+            position: relative;
+            z-index: 2;
         }
         .header-right {
             text-align: right;
@@ -99,6 +102,8 @@
         .main-title {
             text-align: center;
             margin: 20px 0 25px;
+            position: relative;
+            z-index: 2;
         }
         .main-title h1 input {
             font-size: 1.8rem;
@@ -133,31 +138,34 @@
             padding: 15px;
             margin-bottom: 20px;
             border: 1px solid #e9eef3;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(249, 250, 252, 0.95); /* شفافية خفيفة للخلفية */
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem; /* تصغير الخط */
+            font-size: 0.85rem;
         }
         th {
             background: #eef2f6;
             color: #1f3a6b;
             font-weight: 600;
-            padding: 8px 6px; /* تقليل الحشو */
+            padding: 8px 6px;
             border: 1px solid #cfddee;
             font-size: 0.8rem;
         }
         td {
-            padding: 6px 4px; /* تقليل الحشو */
+            padding: 6px 4px;
             border: 1px solid #dde5ed;
             background: white;
         }
         input, select, textarea {
             width: 100%;
-            padding: 6px 8px; /* تقليل الحشو */
+            padding: 6px 8px;
             border: 1px solid #bcccdb;
-            border-radius: 8px; /* تصغير الانحناء */
-            font-size: 0.8rem; /* تصغير الخط */
+            border-radius: 8px;
+            font-size: 0.8rem;
             font-family: inherit;
             background: white;
         }
@@ -169,6 +177,8 @@
             flex-wrap: wrap;
             align-items: center;
             margin: 10px 0;
+            position: relative;
+            z-index: 2;
         }
         .checkbox-item {
             display: flex;
@@ -204,6 +214,9 @@
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(240, 245, 250, 0.95);
         }
         .signature-field {
             flex: 1 1 200px;
@@ -220,6 +233,9 @@
             padding: 15px 20px;
             border-left: 6px solid #1e4a7a;
             margin: 20px 0;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(227, 240, 253, 0.95);
         }
 
         /* أزرار التحكم أصغر */
@@ -228,6 +244,8 @@
             justify-content: flex-end;
             gap: 12px;
             margin-top: 20px;
+            position: relative;
+            z-index: 2;
         }
         .btn {
             padding: 10px 20px;
@@ -240,22 +258,79 @@
             padding: 15px;
             margin: 15px 0;
             font-size: 0.85rem;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(244, 249, 255, 0.95);
+        }
+
+        /* تذييل */
+        hr {
+            position: relative;
+            z-index: 2;
+        }
+        .form-container > p {
+            position: relative;
+            z-index: 2;
         }
 
         /* تحسينات للطباعة - صفحة واحدة */
         @media print {
-            body { background: white; padding: 0; }
-            .form-container { box-shadow: none; padding: 10px; max-width: 100%; }
-            .action-bar, .save-message, .btn { display: none; }
-            input, select, textarea { border: none; background: transparent; padding: 2px; }
-            .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            body { 
+                background: white; 
+                padding: 0; 
+            }
+            .form-container { 
+                box-shadow: none; 
+                padding: 10px; 
+                max-width: 100%; 
+            }
+            .action-bar, .save-message, .btn { 
+                display: none; 
+            }
+            input, select, textarea { 
+                border: none; 
+                background: transparent; 
+                padding: 2px; 
+            }
+            .header { 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+            }
+            th { 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+            }
+            
+            /* العلامة المائية للطباعة - شفافة */
+            .form-container::before {
+                display: block; /* إظهار العلامة المائية في الطباعة */
+            }
+        }
+
+        /* العلامة المائية الشفافة - تظهر دائماً ولكن بشكل خفيف جداً في الشاشة */
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('jazan-logo.png'); /* اسم الصورة المناسب */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 60% auto; /* حجم الشعار مناسب */
+            opacity: 0.08; /* شفافية خفيفة جداً على الشاشة (8%) */
+            pointer-events: none; /* للسماح بالتفاعل مع المحتوى */
+            z-index: 1;
         }
 
         /* للأجهزة الصغيرة */
         @media (max-width: 700px) {
             .form-container { padding: 10px; }
             .main-title h1 input { font-size: 1.4rem; }
+            .form-container::before {
+                background-size: 80% auto; /* تكبير الشعار قليلاً للشاشات الصغيرة */
+            }
         }
     </style>
 </head>
@@ -320,7 +395,7 @@
         </div>
 
         <!-- جدول الغرف الرئيسي (مضغوط) -->
-        <h2 style="margin: 15px 0 5px; font-size: 1.1rem; color:#0f3a6b;">تفاصيل الغرف</h2>
+        <h2 style="margin: 15px 0 5px; font-size: 1.1rem; color:#0f3a6b; position: relative; z-index: 2;">تفاصيل الغرف</h2>
         <div class="info-card" style="overflow-x: auto; padding: 10px;">
             <table>
                 <thead>
@@ -333,7 +408,7 @@
         </div>
 
         <!-- حالة تدفق الهواء والتكييف -->
-        <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; margin: 10px 0;">
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; margin: 10px 0; position: relative; z-index: 2;">
             <label class="checkbox-item"><input type="checkbox" id="airFlowEfficient"> <strong>Air flow efficient</strong></label>
             <label class="checkbox-item"><input type="checkbox" id="notInactive"> <strong>Not Inactive</strong></label>
             <div class="radio-group">
@@ -344,7 +419,7 @@
         </div>
 
         <!-- جدول الإجراءات التصحيحية (مضغوط) -->
-        <h2 style="margin: 15px 0 5px; font-size: 1.1rem;">الإجراءات التصحيحية</h2>
+        <h2 style="margin: 15px 0 5px; font-size: 1.1rem; position: relative; z-index: 2;">الإجراءات التصحيحية</h2>
         <div class="info-card" style="overflow-x: auto; padding: 10px;">
             <table>
                 <thead>
