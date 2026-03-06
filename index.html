@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج احترافي - غرف الضغط السالب</title>
-    <!-- MathJax للمعادلات -->
+    <title>نموذج احترافي عام | قالب ديناميكي</title>
+    <!-- MathJax للمعادلات (اختياري) -->
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <!-- Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -23,6 +23,7 @@
             justify-content: center;
         }
 
+        /* الحاوية الرئيسية للنموذج */
         .form-container {
             max-width: 1300px;
             width: 100%;
@@ -33,6 +34,7 @@
             position: relative;
         }
 
+        /* رأس الصفحة بتصميم عصري - مع حقول قابلة للتعديل */
         .header {
             display: flex;
             justify-content: space-between;
@@ -40,7 +42,7 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
             gap: 15px;
-            background: linear-gradient(135deg, #660000 0%, #8b0000 100%);
+            background: linear-gradient(135deg, #0b2b4f 0%, #123b6e 100%);
             padding: 20px 25px;
             border-radius: 20px;
             color: white;
@@ -96,6 +98,7 @@
             margin-top: 5px;
         }
 
+        /* العنوان الرئيسي - مع حقول قابلة للتعديل */
         .main-title {
             text-align: center;
             margin: 20px 0 25px;
@@ -105,10 +108,10 @@
         .main-title h1 input {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #660000;
+            color: #1a2b4c;
             text-align: center;
-            border: 1px solid #ffcdcd;
-            background: #fff5f5;
+            border: 1px solid #d0ddeb;
+            background: #f8fafd;
             padding: 8px 15px;
             border-radius: 50px;
             width: 100%;
@@ -116,18 +119,19 @@
             margin: 0 auto;
         }
         .main-title .badge input {
-            background: #ffeeee;
-            color: #8b0000;
+            background: #eef2ff;
+            color: #1e3a8a;
             padding: 6px 18px;
             border-radius: 40px;
             font-size: 0.9rem;
             font-weight: 600;
-            border: 1px solid #ffb0b0;
+            border: 1px solid #cbd5e1;
             text-align: center;
             width: auto;
             min-width: 250px;
         }
 
+        /* تحسين الجداول لتصبح أصغر حجماً */
         .info-card {
             background: #f9fafc;
             border-radius: 16px;
@@ -144,11 +148,11 @@
             font-size: 0.85rem;
         }
         th {
-            background: #660000;
-            color: white;
+            background: #eef2f6;
+            color: #1f3a6b;
             font-weight: 600;
             padding: 8px 6px;
-            border: 1px solid #b55f5f;
+            border: 1px solid #cfddee;
             font-size: 0.8rem;
         }
         td {
@@ -166,6 +170,7 @@
             background: white;
         }
         
+        /* عناصر التحكم المدمجة */
         .checkbox-group {
             display: flex;
             gap: 15px;
@@ -200,6 +205,7 @@
             font-size: 0.8rem;
         }
 
+        /* قسم التواقيع بشكل مضغوط */
         .signature-panel {
             background: #f0f5fa;
             border-radius: 16px;
@@ -220,17 +226,19 @@
             margin-bottom: 4px;
         }
 
+        /* مربع الملاحظات مضغوط */
         .note-box-modern {
-            background: #ffe6e6;
+            background: #e3f0fd;
             border-radius: 16px;
             padding: 15px 20px;
-            border-left: 6px solid #8b0000;
+            border-left: 6px solid #1e4a7a;
             margin: 20px 0;
             position: relative;
             z-index: 2;
-            background-color: rgba(255, 230, 230, 0.95);
+            background-color: rgba(227, 240, 253, 0.95);
         }
 
+        /* أزرار التحكم أصغر */
         .action-bar {
             display: flex;
             justify-content: flex-end;
@@ -243,29 +251,29 @@
             padding: 10px 20px;
             border-radius: 30px;
             font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
         }
-        .btn-success { background: #1f5c2e; color: white; }
-        .btn-primary { background: #660000; color: white; }
-        .btn-outline { background: #6c757d; color: white; }
 
+        /* تصغير المعادلات */
         .formula-card {
             padding: 15px;
             margin: 15px 0;
             font-size: 0.85rem;
             position: relative;
             z-index: 2;
-            background-color: #fff0f0;
-            border-radius: 16px;
+            background-color: rgba(244, 249, 255, 0.95);
         }
 
+        /* تذييل */
         hr {
             position: relative;
             z-index: 2;
         }
+        .form-container > p {
+            position: relative;
+            z-index: 2;
+        }
 
+        /* ===== العلامة المائية (تظهر في الشاشة والطباعة) ===== */
         .form-container::before {
             content: "";
             position: absolute;
@@ -277,24 +285,26 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 60% auto;
-            opacity: 0.08;
+            opacity: 0.08; /* 8% شفافية في الشاشة */
             pointer-events: none;
             z-index: 1;
         }
 
+        /* تحسينات للطباعة - صفحة واحدة */
         @media print {
             body { 
                 background: white; 
                 padding: 0; 
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact; /* إجبار الطباعة بالألوان */
+                print-color-adjust: exact; /* المعيار الحديث */
+                color-adjust: exact; /* دعم المتصفحات القديمة */
             }
             .form-container { 
                 box-shadow: none; 
                 padding: 10px; 
                 max-width: 100%; 
             }
-            .action-bar { 
+            .action-bar, .save-message, .btn { 
                 display: none; 
             }
             input, select, textarea { 
@@ -306,41 +316,30 @@
                 -webkit-print-color-adjust: exact; 
                 print-color-adjust: exact; 
             }
+            
+            /* تعزيز ظهور العلامة المائية في الطباعة */
             .form-container::before {
-                opacity: 0.15 !important;
+                opacity: 0.15 !important; /* زيادة الشفافية قليلاً للطباعة */
                 display: block !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
         }
 
+        /* للأجهزة الصغيرة */
         @media (max-width: 700px) {
             .form-container { padding: 10px; }
             .main-title h1 input { font-size: 1.4rem; }
-        }
-
-        .save-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1f5c2e;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .save-message.show {
-            opacity: 1;
+            .form-container::before {
+                background-size: 80% auto;
+            }
         }
     </style>
 </head>
 <body>
 <div class="form-container" id="mainFormContainer">
 
-    <!-- ========== الهيدر ========== -->
+    <!-- ========== الهيدر مع حقول قابلة للتعديل ========== -->
     <div class="header">
         <div class="header-right">
             <div class="arabic"><input type="text" id="arabicCluster" value="تجمع جازان الصحي" placeholder="الجهة بالعربية"></div>
@@ -354,149 +353,150 @@
         </div>
     </div>
 
-    <!-- ========== العنوان ========== -->
+    <!-- ========== العنوان مع حقول قابلة للتعديل ========== -->
     <div class="main-title">
-        <h1><input type="text" id="titleText" value="NEGATIVE PRESSURE ROOMS WEEKLY CHECKLIST" style="text-align: center;"></h1>
-        <span class="badge"><i class="fas fa-clipboard-list"></i> <input type="text" id="badgeText" value="نموذج أسبوعي - غرف العزل السلبي" style="background: transparent; border: none; width: auto;"></span>
+        <h1><input type="text" id="titleText" value="POSITIVE PRESSURE ROOMS WEEKLY CHECKLIST" style="text-align: center;"></h1>
+        <span class="badge"><i class="fas fa-clipboard-list"></i> <input type="text" id="badgeText" value="نموذج أسبوعي - إصدار 2025" style="background: transparent; border: none; width: auto;"></span>
     </div>
 
-    <!-- ========== المعلومات الأساسية ========== -->
-    <div class="info-card">
-        <table>
-            <tr>
-                <th>اسم المستشفى <i class="fas fa-hospital"></i></th>
-                <td><input type="text" id="hospitalName" value="مستشفى بني مالك العام" placeholder="أدخل اسم المستشفى"></td>
-                <th>اليوم</th>
-                <td>
-                    <select id="daySelect">
-                        <option>الأحد</option><option>الإثنين</option><option>الثلاثاء</option><option>الأربعاء</option><option>الخميس</option><option>الجمعة</option><option>السبت</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>سعة الأسرة</th>
-                <td><input type="number" id="bedCapacity" value="50" placeholder="عدد الأسرة"></td>
-                <th>التاريخ</th>
-                <td><input type="date" id="checkDate" value="2025-04-10"></td>
-            </tr>
-            <tr>
-                <th>معيار CBAHI AIIR</th>
-                <td><input type="number" id="cbahiStandard" value="15" placeholder="المعيار"></td>
-                <th>رقم الشهر</th>
-                <td><input type="number" id="monthNo" value="4" placeholder="شهر"></td>
-            </tr>
-        </table>
-    </div>
-
-    <!-- تأكيد فعالية الغرف -->
-    <div class="checkbox-group">
-        <label class="checkbox-item">
-            <input type="checkbox" id="roomsFunctional" checked> <strong>☑ Rooms are functional (Negative Pressure)</strong>
-        </label>
-    </div>
-
-    <!-- ========== الجدول الأول: القسم + القياسات ========== -->
-    <h2 style="margin: 15px 0 5px; font-size: 1.1rem; color:#660000; position: relative; z-index: 2;">قياسات الغرف</h2>
-    <div class="info-card" style="overflow-x: auto; padding: 10px;">
-        <table>
-            <thead>
+    <!-- ========== نموذج رئيسي ========== -->
+    <form id="dynamicForm">
+        <!-- بطاقة المعلومات الأساسية -->
+        <div class="info-card">
+            <table>
                 <tr>
-                    <th style="width: 15%;">القسم</th>
-                    <th style="width: 15%;">الحرارة (C)</th>
-                    <th style="width: 15%;">الرطوبة (%)</th>
-                    <th style="width: 15%;">ACH</th>
-                    <th style="width: 15%;">الضغط (Pa)</th>
+                    <th>اسم المستشفى <i class="fas fa-hospital"></i></th>
+                    <td><input type="text" id="hospitalName" value="مستشفى بني مالك العام" placeholder="أدخل اسم المستشفى"></td>
+                    <th>اليوم</th>
+                    <td>
+                        <select id="daySelect">
+                            <option>الأحد</option><option>الإثنين</option><option>الثلاثاء</option><option>الأربعاء</option><option>الخميس</option><option>الجمعة</option><option>السبت</option>
+                        </select>
+                    </td>
                 </tr>
-            </thead>
-            <tbody id="roomsTableBody">
-                <!-- سيتم إنشاء الصفوف بواسطة JavaScript -->
-            </tbody>
-        </table>
-    </div>
-
-    <!-- حالة تدفق الهواء والتكييف -->
-    <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; margin: 10px 0; position: relative; z-index: 2;">
-        <label class="checkbox-item"><input type="checkbox" id="airFlowEfficient"> <strong>Air flow inward (negative)</strong></label>
-        <label class="checkbox-item"><input type="checkbox" id="notInactive"> <strong>Not Inactive</strong></label>
-        <div class="radio-group">
-            <span style="font-weight:600;">AC :</span>
-            <label><input type="radio" name="acStatus" value="Working" checked> Working</label>
-            <label><input type="radio" name="acStatus" value="Not Working"> Not Working</label>
-        </div>
-    </div>
-
-    <!-- ========== الجدول الثاني: القسم + المشاكل ========== -->
-    <h2 style="margin: 15px 0 5px; font-size: 1.1rem; position: relative; z-index: 2;">الإجراءات التصحيحية</h2>
-    <div class="info-card" style="overflow-x: auto; padding: 10px;">
-        <table>
-            <thead>
                 <tr>
-                    <th style="width: 15%;">القسم</th>
-                    <th style="width: 35%;">وصف المشكلة</th>
-                    <th style="width: 25%;">فني الصيانة</th>
-                    <th style="width: 25%;">مكافحة العدوى</th>
+                    <th>سعة الأسرة</th>
+                    <td><input type="number" id="bedCapacity" value="50" placeholder="عدد الأسرة"></td>
+                    <th>التاريخ</th>
+                    <td><input type="date" id="checkDate" value="2025-04-10"></td>
                 </tr>
-            </thead>
-            <tbody id="correctiveTableBody">
-                <!-- سيتم إنشاء الصفوف بواسطة JavaScript -->
-            </tbody>
-        </table>
-    </div>
+                <tr>
+                    <th>معيار CBAHI AIIR</th>
+                    <td><input type="number" id="cbahiStandard" value="15" placeholder="المعيار"></td>
+                    <th>رقم الشهر</th>
+                    <td><input type="number" id="monthNo" value="4" placeholder="شهر"></td>
+                </tr>
+            </table>
+        </div>
 
-    <!-- التوقيعات -->
-    <div class="signature-panel">
-        <div class="signature-field">
-            <label>👷‍♂️ Checked by Engineer</label>
-            <input type="text" id="engineerName" placeholder="اسم المهندس">
+        <!-- تأكيد فعالية الغرف -->
+        <div class="checkbox-group">
+            <label class="checkbox-item">
+                <input type="checkbox" id="roomsFunctional" checked> <strong>☑ Rooms are functional</strong>
+            </label>
         </div>
-        <div class="signature-field">
-            <label>📅 التاريخ والتوقيع</label>
-            <input type="text" id="engineerDate" placeholder="التاريخ / التوقيع">
-        </div>
-        <div class="signature-field">
-            <label>🩺 Infection Control Comments</label>
-            <input type="text" id="icComments" placeholder="ملاحظات مكافحة العدوى">
-        </div>
-        <div class="signature-field">
-            <label>📅 التاريخ والتوقيع</label>
-            <input type="text" id="icDate" placeholder="التاريخ / التوقيع">
-        </div>
-    </div>
 
-    <!-- مربع الإرشادات - معايير ASHRAE للضغط السالب -->
-    <div class="note-box-modern">
+        <!-- جدول الغرف الرئيسي (معدل) -->
+        <h2 style="margin: 15px 0 5px; font-size: 1.1rem; color:#0f3a6b; position: relative; z-index: 2;">تفاصيل الغرف</h2>
+        <div class="info-card" style="overflow-x: auto; padding: 10px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">القسم</th>
+                        <th style="width: 20%;">الحرارة (C)</th>
+                        <th style="width: 20%;">الرطوبة (%)</th>
+                        <th style="width: 20%;">ACH</th>
+                        <th style="width: 20%;">الضغط (Pa)</th>
+                    </tr>
+                </thead>
+                <tbody id="roomsTableBody">
+                    <!-- سيتم ملء الصفوف بواسطة JS ديناميكياً -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- حالة تدفق الهواء والتكييف -->
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; margin: 10px 0; position: relative; z-index: 2;">
+            <label class="checkbox-item"><input type="checkbox" id="airFlowEfficient"> <strong>Air flow efficient</strong></label>
+            <label class="checkbox-item"><input type="checkbox" id="notInactive"> <strong>Not Inactive</strong></label>
+            <div class="radio-group">
+                <span style="font-weight:600;">AC :</span>
+                <label><input type="radio" name="acStatus" value="Working" checked> Working</label>
+                <label><input type="radio" name="acStatus" value="Not Working"> Not Working</label>
+            </div>
+        </div>
+
+        <!-- جدول الإجراءات التصحيحية (معدل) -->
+        <h2 style="margin: 15px 0 5px; font-size: 1.1rem; position: relative; z-index: 2;">الإجراءات التصحيحية</h2>
+        <div class="info-card" style="overflow-x: auto; padding: 10px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">القسم</th>
+                        <th style="width: 30%;">وصف المشكلة</th>
+                        <th style="width: 25%;">فني الصيانة</th>
+                        <th style="width: 25%;">مكافحة العدوى</th>
+                    </tr>
+                </thead>
+                <tbody id="correctiveTableBody">
+                    <!-- سيتم إنشاء الصفوف ديناميكياً -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- التوقيعات -->
+        <div class="signature-panel">
+            <div class="signature-field">
+                <label>👷‍♂️ Checked by Engineer</label>
+                <input type="text" id="engineerName" placeholder="اسم المهندس">
+            </div>
+            <div class="signature-field">
+                <label>📅 التاريخ والتوقيع</label>
+                <input type="text" id="engineerDate" placeholder="التاريخ / التوقيع">
+            </div>
+            <div class="signature-field">
+                <label>🩺 Infection Control Comments</label>
+                <input type="text" id="icComments" placeholder="ملاحظات مكافحة العدوى">
+            </div>
+            <div class="signature-field">
+                <label>📅 التاريخ والتوقيع</label>
+                <input type="text" id="icDate" placeholder="التاريخ / التوقيع">
+            </div>
+        </div>
+    </form>
+
+    <!-- مربع الإرشادات - قابل للتعديل -->
+    <div class="note-box-modern" style="background: #f0f7ff;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-            <i class="fas fa-pen" style="color: #8b0000;"></i>
-            <h3 style="margin: 0; font-size: 1rem; color: #8b0000;">معايير ASHRAE 170 لغرف الضغط السالب</h3>
+            <i class="fas fa-pen" style="color: #1e4a7a;"></i>
+            <h3 style="margin: 0; font-size: 1rem; color: #1e4a7a;">إرشادات ومعايير قابلة للتعديل</h3>
         </div>
         <ul style="list-style-type: none; display: grid; gap: 8px; margin: 0; padding: 0;">
             <li style="display: flex; align-items: flex-start; gap: 8px;">
-                <i class="fas fa-check-circle" style="color:#8b0000; margin-top: 3px;"></i>
-                <textarea id="guideline1" rows="1" style="min-height: 32px; font-size: 0.8rem;">Negative pressure range: -2.5 to -15 Pa (Pascal)</textarea>
+                <i class="fas fa-check-circle" style="color:#1e7e34; margin-top: 3px;"></i>
+                <textarea id="guideline1" rows="1" style="min-height: 32px; font-size: 0.8rem;">Positive pressure Range should be between 2.5 to 6 Pa (Pascal)</textarea>
             </li>
             <li style="display: flex; align-items: flex-start; gap: 8px;">
-                <i class="fas fa-check-circle" style="color:#8b0000; margin-top: 3px;"></i>
-                <textarea id="guideline2" rows="1" style="min-height: 32px; font-size: 0.8rem;">Air Exchange Rate per hour ≥ 12 ACH for AIIR (new construction)</textarea>
+                <i class="fas fa-check-circle" style="color:#1e7e34; margin-top: 3px;"></i>
+                <textarea id="guideline2" rows="1" style="min-height: 32px; font-size: 0.8rem;">Air Exchange Rate per hour ≥ 7 ACH</textarea>
             </li>
             <li style="display: flex; align-items: flex-start; gap: 8px;">
-                <i class="fas fa-check-circle" style="color:#8b0000; margin-top: 3px;"></i>
-                <textarea id="guideline3" rows="1" style="min-height: 32px; font-size: 0.8rem;">Room must be tightly sealed with inward airflow</textarea>
+                <i class="fas fa-check-circle" style="color:#1e7e34; margin-top: 3px;"></i>
+                <textarea id="guideline3" rows="1" style="min-height: 32px; font-size: 0.8rem;">Systems must be checked by engineering services.</textarea>
             </li>
             <li style="display: flex; align-items: flex-start; gap: 8px;">
-                <i class="fas fa-check-circle" style="color:#8b0000; margin-top: 3px;"></i>
-                <textarea id="guideline4" rows="1" style="min-height: 32px; font-size: 0.8rem;">Open job order if pressure > -2.5 Pa; notify IPC immediately</textarea>
+                <i class="fas fa-check-circle" style="color:#1e7e34; margin-top: 3px;"></i>
+                <textarea id="guideline4" rows="1" style="min-height: 32px; font-size: 0.8rem;">Open job order if problem; notify IPC.</textarea>
             </li>
         </ul>
     </div>
 
-    <!-- المعادلات الرياضية (معادلات ACH كاملة) -->
+    <!-- المعادلات الرياضية (مضغوطة) -->
     <div class="formula-card">
-        <h3 style="margin-top:0; font-size: 1rem; color: #660000;">📐 معادلات حساب ACH (ASHRAE 170-2021)</h3>
-        <p style="font-size: 0.8rem;">\[ ACH = \frac{Q}{V} \quad \text{(النظام المتري: Q = m³/h, V = m³)} \]</p>
-        <p style="font-size: 0.8rem;">\[ ACH = \frac{CFM \times 60}{Volume\ (ft^3)} \quad \text{(النظام الأمريكي)} \]</p>
-        <p style="font-size: 0.8rem;">\[ Q = A \times v \times 3600 \quad \text{(حساب التدفق من السرعة)} \]</p>
-        <p style="font-size: 0.8rem;">\[ \Delta P = \frac{1}{2} \rho v^{2}, \quad \rho \approx 1.2\ \text{kg/m}^3 \]</p>
-        <p style="font-size:0.75rem; color:#2c3e50;">⚙️ للضغط السالب: ΔP سالبة (مثلاً -2.5 Pa)</p>
+        <h3 style="margin-top:0; font-size: 1rem;">Key Formulas (ASHRAE 170-2021)</h3>
+        <p style="font-size: 0.8rem;">\[ ACH = \frac{Q}{V} \quad \text{•} \quad Q = A \times v \times 3600 \quad \text{•} \quad \Delta P = \frac{1}{2} \rho v^{2} \]</p>
+        <p style="font-size: 0.8rem;">\[ ACH = \frac{CFM \times 60}{Room\ Volume} \]</p>
+        <p style="font-size:0.75rem; color:#2c3e50;">⚙️ ρ ≈ 1.2 kg/m³ , V = الطول×العرض×الارتفاع</p>
     </div>
 
     <!-- أزرار التحكم -->
@@ -509,43 +509,50 @@
         <i class="fas fa-check-circle"></i> تم الحفظ بنجاح!
     </div>
 
+    <!-- تذييل -->
     <hr>
-    <p style="text-align:center; font-size:0.7rem; color:#4b6584;">Form NEG-001 (Rev. 2025) – Negative Pressure Rooms – Bani Malik General Hospital</p>
+    <p style="text-align:center; font-size:0.7rem; color:#4b6584;">Form PS-001 (Rev. 2025) – Bani Malik General Hospital</p>
 </div>
 
 <script>
     (function() {
-        // قائمة الأقسام الأساسية
-        const defaultSections = ["AIIR-1 (العزل)", "AIIR-2 (العزل)", "المعمل", "الطوارئ", "العناية", "الغسيل الكلوي", "الأشعة"];
+        // قائمة الأقسام الأساسية (قابلة للتعديل)
+        const defaultSections = ["DR1", "DR2", "ICU", "Mw", "Fmw", "Trauma Room", "PICU"];
 
-        // دالة لبناء صفوف جدول القسم + القياسات
+        // دالة لبناء صفوف جدول الغرف (بدون أعمدة الجناح والطابق)
         function populateRoomsTable() {
             const tbody = document.getElementById('roomsTableBody');
             tbody.innerHTML = '';
             defaultSections.forEach(section => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td><input type="text" class="room-section" value="${section}" placeholder="اسم القسم"></td>
+                    <td><input type="text" class="section-name" value="${section}" placeholder="اسم القسم"></td>
                     <td><input type="number" step="0.1" class="room-temp" placeholder="مئوية" value=""></td>
                     <td><input type="number" step="0.1" class="room-hum" placeholder="%" value=""></td>
                     <td><input type="number" step="0.1" class="room-ach" placeholder="ACH" value=""></td>
-                    <td><input type="number" step="0.1" class="room-pressure" placeholder="Pa" value="-2.5"></td>
+                    <td>
+                        <select class="room-pressure">
+                            <option value="POSITIVE" selected>POSITIVE</option>
+                            <option value="NEGATIVE">NEGATIVE</option>
+                            <option value="NEUTRAL">NEUTRAL</option>
+                        </select>
+                    </td>
                 `;
                 tbody.appendChild(row);
             });
         }
 
-        // دالة لبناء صفوف جدول القسم + المشاكل
+        // دالة لبناء صفوف جدول الإجراءات التصحيحية (بدون أعمدة الجناح والطابق)
         function populateCorrectiveTable() {
             const tbody = document.getElementById('correctiveTableBody');
             tbody.innerHTML = '';
             for (let i = 0; i < 4; i++) {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td><input type="text" class="corr-section" placeholder="اسم القسم"></td>
-                    <td><input type="text" class="corr-desc" placeholder="وصف المشكلة"></td>
-                    <td><input type="text" class="corr-utility" placeholder="فني الصيانة"></td>
-                    <td><input type="text" class="corr-ic" placeholder="مكافحة العدوى"></td>
+                    <td><input type="text" class="corr-section" placeholder="اسم القسم" value=""></td>
+                    <td><input type="text" class="corr-desc" placeholder="وصف المشكلة" value=""></td>
+                    <td><input type="text" class="corr-utility" placeholder="فني الصيانة" value=""></td>
+                    <td><input type="text" class="corr-ic" placeholder="مكافحة العدوى" value=""></td>
                 `;
                 tbody.appendChild(row);
             }
@@ -555,7 +562,7 @@
         function collectFormData() {
             let data = {};
 
-            // الهيدر والعنوان
+            // عناصر الهيدر والعنوان الجديدة
             data.arabicCluster = document.getElementById('arabicCluster').value;
             data.englishCluster = document.getElementById('englishCluster').value;
             data.hospitalNameArabic = document.getElementById('hospitalNameArabic').value;
@@ -581,19 +588,19 @@
             data.guideline3 = document.getElementById('guideline3').value;
             data.guideline4 = document.getElementById('guideline4').value;
 
-            // بيانات جدول القسم + القياسات
+            // بيانات جدول الغرف (معدلة)
             data.rooms = [];
             document.querySelectorAll('#roomsTableBody tr').forEach(row => {
                 data.rooms.push({
-                    section: row.querySelector('.room-section')?.value || '',
+                    section: row.querySelector('.section-name')?.value || '',
                     temp: row.querySelector('.room-temp')?.value || '',
                     hum: row.querySelector('.room-hum')?.value || '',
                     ach: row.querySelector('.room-ach')?.value || '',
-                    pressure: row.querySelector('.room-pressure')?.value || ''
+                    pressure: row.querySelector('.room-pressure')?.value || 'POSITIVE'
                 });
             });
 
-            // بيانات جدول القسم + المشاكل
+            // بيانات الجدول التصحيحي (معدلة)
             data.corrective = [];
             document.querySelectorAll('#correctiveTableBody tr').forEach(row => {
                 data.corrective.push({
@@ -617,7 +624,7 @@
         function populateFormData(data) {
             if (!data) return;
             
-            // الهيدر والعنوان
+            // عناصر الهيدر والعنوان
             if (data.arabicCluster) document.getElementById('arabicCluster').value = data.arabicCluster;
             if (data.englishCluster) document.getElementById('englishCluster').value = data.englishCluster;
             if (data.hospitalNameArabic) document.getElementById('hospitalNameArabic').value = data.hospitalNameArabic;
@@ -645,22 +652,22 @@
             if (data.guideline3) document.getElementById('guideline3').value = data.guideline3;
             if (data.guideline4) document.getElementById('guideline4').value = data.guideline4;
 
-            // تعبئة جدول القسم + القياسات
+            // تعبئة جدول الغرف (معدل)
             if (data.rooms && data.rooms.length > 0) {
                 let rows = document.querySelectorAll('#roomsTableBody tr');
                 rows.forEach((row, index) => {
                     if (data.rooms[index]) {
                         let r = data.rooms[index];
-                        if (row.querySelector('.room-section')) row.querySelector('.room-section').value = r.section || '';
+                        if (row.querySelector('.section-name')) row.querySelector('.section-name').value = r.section || '';
                         if (row.querySelector('.room-temp')) row.querySelector('.room-temp').value = r.temp || '';
                         if (row.querySelector('.room-hum')) row.querySelector('.room-hum').value = r.hum || '';
                         if (row.querySelector('.room-ach')) row.querySelector('.room-ach').value = r.ach || '';
-                        if (row.querySelector('.room-pressure')) row.querySelector('.room-pressure').value = r.pressure || '';
+                        if (row.querySelector('.room-pressure')) row.querySelector('.room-pressure').value = r.pressure || 'POSITIVE';
                     }
                 });
             }
 
-            // تعبئة جدول القسم + المشاكل
+            // تعبئة الجدول التصحيحي (معدل)
             if (data.corrective && data.corrective.length > 0) {
                 let rows = document.querySelectorAll('#correctiveTableBody tr');
                 rows.forEach((row, index) => {
@@ -686,7 +693,7 @@
         populateCorrectiveTable();
 
         // تحميل البيانات المحفوظة
-        const savedData = localStorage.getItem('negativePressureFormData');
+        const savedData = localStorage.getItem('professionalFormData');
         if (savedData) {
             try {
                 populateFormData(JSON.parse(savedData));
@@ -698,7 +705,7 @@
         // ===== أحداث الأزرار =====
         document.getElementById('saveBtn').addEventListener('click', function() {
             const formData = collectFormData();
-            localStorage.setItem('negativePressureFormData', JSON.stringify(formData));
+            localStorage.setItem('professionalFormData', JSON.stringify(formData));
             const notif = document.getElementById('saveNotification');
             notif.classList.add('show');
             setTimeout(() => notif.classList.remove('show'), 2500);
@@ -709,9 +716,7 @@
         });
 
         document.getElementById('resetBtn').addEventListener('click', function() {
-            localStorage.removeItem('negativePressureFormData');
-            
-            // إعادة تعبئة الجداول
+            localStorage.removeItem('professionalFormData');
             populateRoomsTable();
             populateCorrectiveTable();
             
@@ -720,8 +725,8 @@
             document.getElementById('englishCluster').value = 'Jazan Health Cluster';
             document.getElementById('hospitalNameArabic').value = 'بني مالك العام';
             document.getElementById('hospitalNameEnglish').value = 'Bani Malik General Hospital';
-            document.getElementById('titleText').value = 'NEGATIVE PRESSURE ROOMS WEEKLY CHECKLIST';
-            document.getElementById('badgeText').value = 'نموذج أسبوعي - غرف العزل السلبي';
+            document.getElementById('titleText').value = 'POSITIVE PRESSURE ROOMS WEEKLY CHECKLIST';
+            document.getElementById('badgeText').value = 'نموذج أسبوعي - إصدار 2025';
             document.getElementById('hospitalName').value = 'مستشفى بني مالك العام';
             document.getElementById('daySelect').value = 'الأحد';
             document.getElementById('bedCapacity').value = '50';
@@ -733,10 +738,10 @@
             document.getElementById('notInactive').checked = false;
             document.querySelector('input[name="acStatus"][value="Working"]').checked = true;
             
-            document.getElementById('guideline1').value = "Negative pressure range: -2.5 to -15 Pa (Pascal)";
-            document.getElementById('guideline2').value = "Air Exchange Rate per hour ≥ 12 ACH for AIIR (new construction)";
-            document.getElementById('guideline3').value = "Room must be tightly sealed with inward airflow";
-            document.getElementById('guideline4').value = "Open job order if pressure > -2.5 Pa; notify IPC immediately";
+            document.getElementById('guideline1').value = "Positive pressure Range should be between 2.5 to 6 Pa (Pascal)";
+            document.getElementById('guideline2').value = "Air Exchange Rate per hour ≥ 7 ACH";
+            document.getElementById('guideline3').value = "Systems must be checked by engineering services.";
+            document.getElementById('guideline4').value = "Open job order if problem; notify IPC.";
             
             document.getElementById('engineerName').value = '';
             document.getElementById('engineerDate').value = '';
