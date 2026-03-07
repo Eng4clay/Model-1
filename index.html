@@ -9,7 +9,7 @@
     <!-- Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* نفس الأنماط السابقة بدون تغيير */
+        /* نفس الأنماط السابقة مع إضافة تعديلات بسيطة لحقل الإدخال الرقمي */
         * {
             margin: 0;
             padding: 0;
@@ -344,6 +344,7 @@
             margin: 15px 0 5px;
             position: relative;
             z-index: 2;
+            flex-wrap: wrap;
         }
         .add-row-btn {
             background: #28a745;
@@ -374,6 +375,15 @@
         }
         td:last-child {
             text-align: center;
+        }
+        /* حقل إدخال عدد الصفوف */
+        .row-count-input {
+            width: 60px;
+            padding: 4px;
+            border-radius: 20px;
+            border: 1px solid #bcccdb;
+            text-align: center;
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -437,10 +447,11 @@
             </label>
         </div>
 
-        <!-- جدول الغرف الرئيسي (معدل) مع زر إضافة صف -->
+        <!-- جدول الغرف الرئيسي (معدل) مع زر إضافة صف وحقل عدد -->
         <div class="table-header-with-btn">
             <h2 style="margin: 0; font-size: 1.1rem; color:#0f3a6b;">Manual Checks</h2>
-            <button type="button" class="add-row-btn" id="addRoomRowBtn"><i class="fas fa-plus-circle"></i> إضافة صف</button>
+            <input type="number" id="roomRowCount" class="row-count-input" value="1" min="1" max="20" style="width: 70px;">
+            <button type="button" class="add-row-btn" id="addRoomRowBtn"><i class="fas fa-plus-circle"></i> إضافة</button>
         </div>
         <div class="info-card" style="overflow-x: auto; padding: 10px;">
             <table>
@@ -471,10 +482,11 @@
             </div>
         </div>
 
-        <!-- جدول الإجراءات التصحيحية (معدل) مع زر إضافة صف -->
+        <!-- جدول الإجراءات التصحيحية (معدل) مع زر إضافة صف وحقل عدد -->
         <div class="table-header-with-btn">
             <h2 style="margin: 0; font-size: 1.1rem;">الإجراءات التصحيحية</h2>
-            <button type="button" class="add-row-btn" id="addCorrectiveRowBtn"><i class="fas fa-plus-circle"></i> إضافة صف</button>
+            <input type="number" id="correctiveRowCount" class="row-count-input" value="1" min="1" max="20" style="width: 70px;">
+            <button type="button" class="add-row-btn" id="addCorrectiveRowBtn"><i class="fas fa-plus-circle"></i> إضافة</button>
         </div>
         <div class="info-card" style="overflow-x: auto; padding: 10px;">
             <table>
@@ -619,15 +631,19 @@
             }
         }
 
-        // دوال إضافة صف جديد
-        function addRoomRow() {
+        // دوال إضافة صفوف متعددة
+        function addRoomRows(count) {
             const tbody = document.getElementById('roomsTableBody');
-            tbody.appendChild(createRoomRow(""));
+            for (let i = 0; i < count; i++) {
+                tbody.appendChild(createRoomRow(""));
+            }
         }
 
-        function addCorrectiveRow() {
+        function addCorrectiveRows(count) {
             const tbody = document.getElementById('correctiveTableBody');
-            tbody.appendChild(createCorrectiveRow());
+            for (let i = 0; i < count; i++) {
+                tbody.appendChild(createCorrectiveRow());
+            }
         }
 
         // دالة لجمع كل البيانات
@@ -779,8 +795,21 @@
         }
 
         // ===== أحداث الأزرار =====
-        document.getElementById('addRoomRowBtn').addEventListener('click', addRoomRow);
-        document.getElementById('addCorrectiveRowBtn').addEventListener('click', addCorrectiveRow);
+        document.getElementById('addRoomRowBtn').addEventListener('click', function() {
+            const countInput = document.getElementById('roomRowCount');
+            let count = parseInt(countInput.value, 10);
+            if (isNaN(count) || count < 1) count = 1;
+            if (count > 20) count = 20; // حد أقصى للحماية
+            addRoomRows(count);
+        });
+
+        document.getElementById('addCorrectiveRowBtn').addEventListener('click', function() {
+            const countInput = document.getElementById('correctiveRowCount');
+            let count = parseInt(countInput.value, 10);
+            if (isNaN(count) || count < 1) count = 1;
+            if (count > 20) count = 20;
+            addCorrectiveRows(count);
+        });
 
         document.getElementById('saveBtn').addEventListener('click', function() {
             const formData = collectFormData();
