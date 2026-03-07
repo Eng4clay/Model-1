@@ -9,6 +9,7 @@
     <!-- Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* نفس الأنماط السابقة بدون تغيير */
         * {
             margin: 0;
             padding: 0;
@@ -439,7 +440,7 @@
         <!-- جدول الغرف الرئيسي (معدل) مع زر إضافة صف -->
         <div class="table-header-with-btn">
             <h2 style="margin: 0; font-size: 1.1rem; color:#0f3a6b;">Manual Checks</h2>
-            <button class="add-row-btn" id="addRoomRowBtn"><i class="fas fa-plus-circle"></i> إضافة صف</button>
+            <button type="button" class="add-row-btn" id="addRoomRowBtn"><i class="fas fa-plus-circle"></i> إضافة صف</button>
         </div>
         <div class="info-card" style="overflow-x: auto; padding: 10px;">
             <table>
@@ -473,7 +474,7 @@
         <!-- جدول الإجراءات التصحيحية (معدل) مع زر إضافة صف -->
         <div class="table-header-with-btn">
             <h2 style="margin: 0; font-size: 1.1rem;">الإجراءات التصحيحية</h2>
-            <button class="add-row-btn" id="addCorrectiveRowBtn"><i class="fas fa-plus-circle"></i> إضافة صف</button>
+            <button type="button" class="add-row-btn" id="addCorrectiveRowBtn"><i class="fas fa-plus-circle"></i> إضافة صف</button>
         </div>
         <div class="info-card" style="overflow-x: auto; padding: 10px;">
             <table>
@@ -582,7 +583,7 @@
                         <option value="NEUTRAL">NEUTRAL</option>
                     </select>
                 </td>
-                <td><button class="delete-row-btn" onclick="this.closest('tr').remove()"><i class="fas fa-trash-alt"></i></button></td>
+                <td><button type="button" class="delete-row-btn" onclick="this.closest('tr').remove()"><i class="fas fa-trash-alt"></i></button></td>
             `;
             return row;
         }
@@ -595,7 +596,7 @@
                 <td><input type="text" class="corr-desc" placeholder="وصف المشكلة" value=""></td>
                 <td><input type="text" class="corr-utility" placeholder="فني الصيانة" value=""></td>
                 <td><input type="text" class="corr-ic" placeholder="مكافحة العدوى" value=""></td>
-                <td><button class="delete-row-btn" onclick="this.closest('tr').remove()"><i class="fas fa-trash-alt"></i></button></td>
+                <td><button type="button" class="delete-row-btn" onclick="this.closest('tr').remove()"><i class="fas fa-trash-alt"></i></button></td>
             `;
             return row;
         }
