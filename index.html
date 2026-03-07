@@ -334,6 +334,46 @@
                 background-size: 80% auto;
             }
         }
+
+        /* أنماط لأزرار إضافة وحذف الصفوف */
+        .table-header-with-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0 5px;
+            position: relative;
+            z-index: 2;
+        }
+        .add-row-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+        .add-row-btn:hover {
+            background: #218838;
+        }
+        .delete-row-btn {
+            background: transparent;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0 5px;
+        }
+        .delete-row-btn:hover {
+            color: #c82333;
+        }
+        td:last-child {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -396,17 +436,21 @@
             </label>
         </div>
 
-        <!-- جدول الغرف الرئيسي (معدل) -->
-        <h2 style="margin: 15px 0 5px; font-size: 1.1rem; color:#0f3a6b; position: relative; z-index: 2;"> Manual Checks</h2>
+        <!-- جدول الغرف الرئيسي (معدل) مع زر إضافة صف -->
+        <div class="table-header-with-btn">
+            <h2 style="margin: 0; font-size: 1.1rem; color:#0f3a6b;">Manual Checks</h2>
+            <button class="add-row-btn" id="addRoomRowBtn"><i class="fas fa-plus-circle"></i> إضافة صف</button>
+        </div>
         <div class="info-card" style="overflow-x: auto; padding: 10px;">
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 20%;">Department </th>
-                        <th style="width: 20%;">Temperature  (C)</th>
-                        <th style="width: 20%;">Humidity  (%)</th>
-                        <th style="width: 20%;">ACH</th>
-                        <th style="width: 20%;">Pressure (Pa)</th>
+                        <th style="width: 18%;">Department</th>
+                        <th style="width: 18%;">Temperature (C)</th>
+                        <th style="width: 18%;">Humidity (%)</th>
+                        <th style="width: 18%;">ACH</th>
+                        <th style="width: 18%;">Pressure (Pa)</th>
+                        <th style="width: 10%;"></th> <!-- عمود للحذف -->
                     </tr>
                 </thead>
                 <tbody id="roomsTableBody">
@@ -426,16 +470,20 @@
             </div>
         </div>
 
-        <!-- جدول الإجراءات التصحيحية (معدل) -->
-        <h2 style="margin: 15px 0 5px; font-size: 1.1rem; position: relative; z-index: 2;">الإجراءات التصحيحية</h2>
+        <!-- جدول الإجراءات التصحيحية (معدل) مع زر إضافة صف -->
+        <div class="table-header-with-btn">
+            <h2 style="margin: 0; font-size: 1.1rem;">الإجراءات التصحيحية</h2>
+            <button class="add-row-btn" id="addCorrectiveRowBtn"><i class="fas fa-plus-circle"></i> إضافة صف</button>
+        </div>
         <div class="info-card" style="overflow-x: auto; padding: 10px;">
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 20%;">Department</th>
-                        <th style="width: 30%;">Problem Description </th>
-                        <th style="width: 25%;"> Engineering Management </th>
-                        <th style="width: 25%;">Infection Control </th>
+                        <th style="width: 18%;">Department</th>
+                        <th style="width: 27%;">Problem Description</th>
+                        <th style="width: 25%;">Engineering Management</th>
+                        <th style="width: 25%;">Infection Control</th>
+                        <th style="width: 5%;"></th> <!-- عمود للحذف -->
                     </tr>
                 </thead>
                 <tbody id="correctiveTableBody">
@@ -519,43 +567,66 @@
         // قائمة الأقسام الأساسية (قابلة للتعديل)
         const defaultSections = ["DR1", "DR2", "ICU", "Mw", "Fmw", "Trauma Room", "PICU"];
 
-        // دالة لبناء صفوف جدول الغرف (بدون أعمدة الجناح والطابق)
+        // دالة لبناء صف جدول الغرف (مع زر حذف)
+        function createRoomRow(sectionName = "") {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="text" class="section-name" value="${sectionName}" placeholder="اسم القسم"></td>
+                <td><input type="number" step="0.1" class="room-temp" placeholder="مئوية" value=""></td>
+                <td><input type="number" step="0.1" class="room-hum" placeholder="%" value=""></td>
+                <td><input type="number" step="0.1" class="room-ach" placeholder="ACH" value=""></td>
+                <td>
+                    <select class="room-pressure">
+                        <option value="POSITIVE" selected>POSITIVE</option>
+                        <option value="NEGATIVE">NEGATIVE</option>
+                        <option value="NEUTRAL">NEUTRAL</option>
+                    </select>
+                </td>
+                <td><button class="delete-row-btn" onclick="this.closest('tr').remove()"><i class="fas fa-trash-alt"></i></button></td>
+            `;
+            return row;
+        }
+
+        // دالة لبناء صف جدول الإجراءات التصحيحية (مع زر حذف)
+        function createCorrectiveRow() {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="text" class="corr-section" placeholder="اسم القسم" value=""></td>
+                <td><input type="text" class="corr-desc" placeholder="وصف المشكلة" value=""></td>
+                <td><input type="text" class="corr-utility" placeholder="فني الصيانة" value=""></td>
+                <td><input type="text" class="corr-ic" placeholder="مكافحة العدوى" value=""></td>
+                <td><button class="delete-row-btn" onclick="this.closest('tr').remove()"><i class="fas fa-trash-alt"></i></button></td>
+            `;
+            return row;
+        }
+
+        // دالة لملء جدول الغرف بالصفوف الافتراضية
         function populateRoomsTable() {
             const tbody = document.getElementById('roomsTableBody');
             tbody.innerHTML = '';
             defaultSections.forEach(section => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><input type="text" class="section-name" value="${section}" placeholder="اسم القسم"></td>
-                    <td><input type="number" step="0.1" class="room-temp" placeholder="مئوية" value=""></td>
-                    <td><input type="number" step="0.1" class="room-hum" placeholder="%" value=""></td>
-                    <td><input type="number" step="0.1" class="room-ach" placeholder="ACH" value=""></td>
-                    <td>
-                        <select class="room-pressure">
-                            <option value="POSITIVE" selected>POSITIVE</option>
-                            <option value="NEGATIVE">NEGATIVE</option>
-                            <option value="NEUTRAL">NEUTRAL</option>
-                        </select>
-                    </td>
-                `;
-                tbody.appendChild(row);
+                tbody.appendChild(createRoomRow(section));
             });
         }
 
-        // دالة لبناء صفوف جدول الإجراءات التصحيحية (بدون أعمدة الجناح والطابق)
+        // دالة لملء جدول الإجراءات التصحيحية بالصفوف الافتراضية (4 صفوف)
         function populateCorrectiveTable() {
             const tbody = document.getElementById('correctiveTableBody');
             tbody.innerHTML = '';
             for (let i = 0; i < 4; i++) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><input type="text" class="corr-section" placeholder="اسم القسم" value=""></td>
-                    <td><input type="text" class="corr-desc" placeholder="وصف المشكلة" value=""></td>
-                    <td><input type="text" class="corr-utility" placeholder="فني الصيانة" value=""></td>
-                    <td><input type="text" class="corr-ic" placeholder="مكافحة العدوى" value=""></td>
-                `;
-                tbody.appendChild(row);
+                tbody.appendChild(createCorrectiveRow());
             }
+        }
+
+        // دوال إضافة صف جديد
+        function addRoomRow() {
+            const tbody = document.getElementById('roomsTableBody');
+            tbody.appendChild(createRoomRow(""));
+        }
+
+        function addCorrectiveRow() {
+            const tbody = document.getElementById('correctiveTableBody');
+            tbody.appendChild(createCorrectiveRow());
         }
 
         // دالة لجمع كل البيانات
@@ -588,7 +659,7 @@
             data.guideline3 = document.getElementById('guideline3').value;
             data.guideline4 = document.getElementById('guideline4').value;
 
-            // بيانات جدول الغرف (معدلة)
+            // بيانات جدول الغرف
             data.rooms = [];
             document.querySelectorAll('#roomsTableBody tr').forEach(row => {
                 data.rooms.push({
@@ -600,7 +671,7 @@
                 });
             });
 
-            // بيانات الجدول التصحيحي (معدلة)
+            // بيانات الجدول التصحيحي
             data.corrective = [];
             document.querySelectorAll('#correctiveTableBody tr').forEach(row => {
                 data.corrective.push({
@@ -652,33 +723,37 @@
             if (data.guideline3) document.getElementById('guideline3').value = data.guideline3;
             if (data.guideline4) document.getElementById('guideline4').value = data.guideline4;
 
-            // تعبئة جدول الغرف (معدل)
+            // تعبئة جدول الغرف
             if (data.rooms && data.rooms.length > 0) {
-                let rows = document.querySelectorAll('#roomsTableBody tr');
-                rows.forEach((row, index) => {
-                    if (data.rooms[index]) {
-                        let r = data.rooms[index];
-                        if (row.querySelector('.section-name')) row.querySelector('.section-name').value = r.section || '';
-                        if (row.querySelector('.room-temp')) row.querySelector('.room-temp').value = r.temp || '';
-                        if (row.querySelector('.room-hum')) row.querySelector('.room-hum').value = r.hum || '';
-                        if (row.querySelector('.room-ach')) row.querySelector('.room-ach').value = r.ach || '';
-                        if (row.querySelector('.room-pressure')) row.querySelector('.room-pressure').value = r.pressure || 'POSITIVE';
-                    }
+                let tbody = document.getElementById('roomsTableBody');
+                tbody.innerHTML = ''; // إعادة بناء الصفوف
+                data.rooms.forEach(room => {
+                    let row = createRoomRow(room.section);
+                    // تعبئة القيم
+                    if (row.querySelector('.room-temp')) row.querySelector('.room-temp').value = room.temp || '';
+                    if (row.querySelector('.room-hum')) row.querySelector('.room-hum').value = room.hum || '';
+                    if (row.querySelector('.room-ach')) row.querySelector('.room-ach').value = room.ach || '';
+                    if (row.querySelector('.room-pressure')) row.querySelector('.room-pressure').value = room.pressure || 'POSITIVE';
+                    tbody.appendChild(row);
                 });
+            } else {
+                populateRoomsTable(); // افتراضي
             }
 
-            // تعبئة الجدول التصحيحي (معدل)
+            // تعبئة الجدول التصحيحي
             if (data.corrective && data.corrective.length > 0) {
-                let rows = document.querySelectorAll('#correctiveTableBody tr');
-                rows.forEach((row, index) => {
-                    if (data.corrective[index]) {
-                        let c = data.corrective[index];
-                        if (row.querySelector('.corr-section')) row.querySelector('.corr-section').value = c.section || '';
-                        if (row.querySelector('.corr-desc')) row.querySelector('.corr-desc').value = c.desc || '';
-                        if (row.querySelector('.corr-utility')) row.querySelector('.corr-utility').value = c.utility || '';
-                        if (row.querySelector('.corr-ic')) row.querySelector('.corr-ic').value = c.ic || '';
-                    }
+                let tbody = document.getElementById('correctiveTableBody');
+                tbody.innerHTML = '';
+                data.corrective.forEach(corr => {
+                    let row = createCorrectiveRow();
+                    if (row.querySelector('.corr-section')) row.querySelector('.corr-section').value = corr.section || '';
+                    if (row.querySelector('.corr-desc')) row.querySelector('.corr-desc').value = corr.desc || '';
+                    if (row.querySelector('.corr-utility')) row.querySelector('.corr-utility').value = corr.utility || '';
+                    if (row.querySelector('.corr-ic')) row.querySelector('.corr-ic').value = corr.ic || '';
+                    tbody.appendChild(row);
                 });
+            } else {
+                populateCorrectiveTable();
             }
 
             // التواقيع
@@ -703,6 +778,9 @@
         }
 
         // ===== أحداث الأزرار =====
+        document.getElementById('addRoomRowBtn').addEventListener('click', addRoomRow);
+        document.getElementById('addCorrectiveRowBtn').addEventListener('click', addCorrectiveRow);
+
         document.getElementById('saveBtn').addEventListener('click', function() {
             const formData = collectFormData();
             localStorage.setItem('professionalFormData', JSON.stringify(formData));
